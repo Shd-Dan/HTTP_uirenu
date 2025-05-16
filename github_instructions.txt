@@ -1,0 +1,32 @@
+# After creating your repository on GitHub, run these commands:
+
+# If you want to use HTTPS:
+git remote add origin https://github.com/YOUR_GITHUB_USERNAME/REPOSITORY_NAME.git
+
+# Or if you want to use SSH (recommended if you have SSH keys set up):
+git remote add origin git@github.com:YOUR_GITHUB_USERNAME/REPOSITORY_NAME.git
+
+# Then push your code:
+git branch -M main
+git push -u origin main
+
+# On your other PC, you'll need to:
+1. Clone the repository:
+   git clone https://github.com/YOUR_GITHUB_USERNAME/REPOSITORY_NAME.git
+   # or
+   git clone git@github.com:YOUR_GITHUB_USERNAME/REPOSITORY_NAME.git
+
+2. Create and activate a virtual environment:
+   python -m venv venv
+   source venv/bin/activate  # On Linux/Mac
+   # or
+   .\venv\Scripts\activate  # On Windows
+
+3. Install dependencies:
+   pip install -r requirements.txt
+
+4. Run migrations:
+   python manage.py migrate
+
+5. Start the development server:
+   python manage.py runserver 
