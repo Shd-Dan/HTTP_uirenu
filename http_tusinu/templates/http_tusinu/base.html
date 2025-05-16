@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Django Project{% endblock title %}</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'http_tusinu/css/style.css' %}">
+    {% block extra_css %}{% endblock extra_css %}
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content">
+            <h1>HTTP Tutorial</h1>
+            <div class="header-menu-toggle" id="headerMenuToggle">
+                <span>Topics</span>
+                <span class="arrow">▼</span>
+            </div>
+        </div>
+        <nav class="header-menu" id="headerMenu">
+            <ul class="header-topics">
+                <li><a href="#">HTTP Basics</a></li>
+                <li><a href="#">REST APIs</a></li>
+                <li><a href="#">Web Security</a></li>
+                <li><a href="#">Caching</a></li>
+                <li><a href="#">Performance</a></li>
+                <li><a href="#">Web Protocols</a></li>
+                <li><a href="#">API Testing</a></li>
+                <li><a href="#">Documentation</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="side-menu-toggle" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    
+
+    <main class="content">
+        {% block content %}
+        {% endblock content %}
+    </main>
+
+    <footer>
+        <!-- Add your footer content here -->
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="{% static 'http_tusinu/js/main.js' %}"></script>
+    {% block extra_js %}{% endblock extra_js %}
+
+    <script>
+        function toggleMenu() {
+            document.querySelector('.side-menu').classList.toggle('active');
+            document.querySelector('.content').classList.toggle('shifted');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('headerMenuToggle');
+            const headerMenu = document.getElementById('headerMenu');
+            const arrow = document.querySelector('.arrow');
+            let isMenuOpen = false;
+
+            menuToggle.addEventListener('click', function() {
+                isMenuOpen = !isMenuOpen;
+                if (isMenuOpen) {
+                    headerMenu.style.height = headerMenu.scrollHeight + 'px';
+                } else {
+                    headerMenu.style.height = '0';
+                }
+                arrow.classList.toggle('rotated');
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!headerMenu.contains(event.target) && !menuToggle.contains(event.target) && isMenuOpen) {
+                    isMenuOpen = false;
+                    headerMenu.style.height = '0';
+                    arrow.classList.remove('rotated');
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
